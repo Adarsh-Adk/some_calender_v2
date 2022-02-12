@@ -7,10 +7,12 @@
    <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square" />
 </a>
 
+This is a fork of Some Calendar package created by https://github.com/agryva </b>
+
 Custom calendar with Multi-select & range configurable calendar
 
 ## New Features
-+ Added View Mode Somecalendar #15
++ Added null safety
 
 
 ## Help Maintenance
