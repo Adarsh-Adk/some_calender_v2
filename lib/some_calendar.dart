@@ -57,7 +57,7 @@ class SomeCalendar extends StatefulWidget {
     assert(mode != null);
     if (startDate == null) startDate = SomeUtils.getStartDateDefault();
     if (lastDate == null) lastDate = SomeUtils.getLastDateDefault();
-    if (selectedDates == null) selectedDates = List();
+    if (selectedDates == null) selectedDates = [];
     if (selectedDate == null) {
       selectedDate = Jiffy(DateTime(now.year, now.month, now.day)).dateTime;
     }
@@ -141,7 +141,7 @@ class SomeCalendarState extends State<SomeCalendar> {
     if (labels == null) labels = new Labels();
     if (mode == SomeMode.Multi || mode == SomeMode.Range) {
       if (selectedDates.length > 0) {
-        List<DateTime> tempListDates = List();
+        List<DateTime> tempListDates = [];
         for (var value in selectedDates) {
           tempListDates.add(SomeUtils.setToMidnight(value));
         }
@@ -157,8 +157,7 @@ class SomeCalendarState extends State<SomeCalendar> {
     if (mode == SomeMode.Range) {
       if (selectedDates == null) {
         firstRangeDate = Jiffy(DateTime(now.year, now.month, now.day)).dateTime;
-        endRangeDate =
-            Jiffy(DateTime(now.year, now.month, now.day)).add(days: 2);
+        endRangeDate = Jiffy(DateTime(now.year, now.month, now.day)).add(days: 2).dateTime;
       } else {
         DateTime dateRange = now;
         if (selectedDates.length > 0) {
@@ -173,13 +172,13 @@ class SomeCalendarState extends State<SomeCalendar> {
             firstRangeDate =
                 Jiffy(DateTime(now.year, now.month, now.day)).dateTime;
             endRangeDate =
-                Jiffy(DateTime(now.year, now.month, now.day)).add(days: 2);
+                Jiffy(DateTime(now.year, now.month, now.day)).add(days: 2).dateTime;
           }
         } else {
           firstRangeDate =
               Jiffy(DateTime(now.year, now.month, now.day)).dateTime;
           endRangeDate =
-              Jiffy(DateTime(now.year, now.month, now.day)).add(days: 2);
+              Jiffy(DateTime(now.year, now.month, now.day)).add(days: 2).dateTime;
         }
       }
 
@@ -202,7 +201,7 @@ class SomeCalendarState extends State<SomeCalendar> {
         selectedDates.clear();
         for (int i = 0; i < diff; i++) {
           selectedDates.add(date);
-          date = Jiffy(date).add(days: 1);
+          date = Jiffy(date).add(days: 1).dateTime;
         }
       }
     } else {
@@ -342,7 +341,7 @@ class SomeCalendarState extends State<SomeCalendar> {
     var date = firstRangeDate;
     for (int i = 0; i < diff; i++) {
       selectedDates.add(date);
-      date = Jiffy(date).add(days: 1);
+      date = Jiffy(date).add(days: 1).dateTime;
     }
   }
 
@@ -364,7 +363,7 @@ class SomeCalendarState extends State<SomeCalendar> {
       var start = Jiffy(DateTime(lastDate.year, lastDate.month))
         ..subtract(months: 1);
       pageStartDate = start.dateTime;
-      pageEndDate = Jiffy(lastDate).subtract(days: 1);
+      pageEndDate = Jiffy(lastDate).subtract(days: 1).dateTime;
     } else {
       var firstDateOfCurrentMonth =
       Jiffy(DateTime(startDate.year, startDate.month))
@@ -595,11 +594,13 @@ class SomeCalendarState extends State<SomeCalendar> {
             Row(
               children: <Widget>[
                 Expanded(
-                  child: RaisedButton(
-                    elevation: 0,
-                    color: primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18)),
+                  child: ElevatedButton(
+                    style: Theme.of(context).elevatedButtonTheme.style.copyWith(
+                      backgroundColor: MaterialStateProperty.all(primaryColor),
+                      elevation: MaterialStateProperty.all(0),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(18)),
+                      ),)
                     ),
                     onPressed: () {
                       if (mode == SomeMode.Multi || mode == SomeMode.Range) {
@@ -621,11 +622,13 @@ class SomeCalendarState extends State<SomeCalendar> {
                     ),
                   ),
                 ),
-                RaisedButton(
-                  elevation: 0,
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                ElevatedButton(
+                  style: Theme.of(context).elevatedButtonTheme.style.copyWith(
+                      backgroundColor: MaterialStateProperty.all(Colors.white),
+                      elevation: MaterialStateProperty.all(0),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),)
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
