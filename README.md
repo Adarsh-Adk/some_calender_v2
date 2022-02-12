@@ -30,9 +30,18 @@ I've taken the time to make this library, help support to develop it or buy me c
 ### Setup
 Add dependency to your pubspec.yaml:
 
-```dart
+```yaml
 some_calendar: ^{latest_version}
 ```
+or
+
+```yaml
+some_calendar:
+  git:
+    url: git://github.com/Adarsh-Adk/some_calender_v2.git
+```
+
+
 
 ### Basic use
 First, add an import to your code:
@@ -65,13 +74,13 @@ Single Mode, add to your code:
           isWithoutDialog: false,
           selectedDate: selectedDate,
           labels: new Labels(
-              dialogDone: 'Selesai',
-              dialogCancel: 'Batal',
-              dialogRangeFirstDate: 'Tanggal Pertama',
-              dialogRangeLastDate: 'Tanggal Terakhir',
+              dialogDone: 'Done',
+              dialogCancel: 'Cancel',
+              dialogRangeFirstDate: 'From',
+              dialogRangeLastDate: 'To',
           ),
-          startDate: Jiffy().subtract(years: 3),
-          lastDate: Jiffy().add(months: 9),
+          startDate: Jiffy().subtract(years: 3).dateTime,
+          lastDate: Jiffy().add(months: 9).dateTime,
           done: (date) {
             setState(() {
               selectedDate = date;
@@ -87,8 +96,8 @@ Multi Mode, add to your code:
         context: context,
         builder: (_) => SomeCalendar(
           mode: SomeMode.Multi,
-          startDate: Jiffy().subtract(years: 3),
-          lastDate: Jiffy().add(months: 9),
+          startDate: Jiffy().subtract(years: 3).dateTime,
+          lastDate: Jiffy().add(months: 9).dateTime,
           isWithoutDialog: false,
           selectedDates: selectedDates,
           viewMode: ViewMode.Edit,
@@ -107,8 +116,8 @@ Range Mode, add to your code:
         context: context,
         builder: (_) => SomeCalendar(
           mode: SomeMode.Range,
-          startDate: Jiffy().subtract(years: 3),
-          lastDate: Jiffy().add(months: 9),
+          startDate: Jiffy().subtract(years: 3).dateTime,
+          lastDate: Jiffy().add(months: 9).dateTime,
           selectedDates: selectedDates,
           isWithoutDialog: false,
           viewMode: ViewMode.Edit,
